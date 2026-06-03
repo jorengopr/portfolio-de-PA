@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>José Orengo Rodríguez — Profesional Autorizado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:   #0d1f2d;
+      --teal:   #1a7f74;
+      --teal-lt:#2eb8a8;
+      --gold:   #c9a84c;
+      --cream:  #f5f0e8;
+      --white:  #ffffff;
+      --text:   #1c1c1c;
+      --muted:  #5e6e6b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 80% 50%, rgba(26,127,116,.35) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 20% 80%, rgba(201,168,76,.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px 80px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp .8s .2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 8px;
+      opacity: 0;
+      animation: fadeUp .8s .4s forwards;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--teal-lt);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(255,255,255,.55);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp .8s .55s forwards;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,.7);
+      max-width: 420px;
+      margin-bottom: 52px;
+      opacity: 0;
+      animation: fadeUp .8s .7s forwards;
+    }
+
+    .contact-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeUp .8s .85s forwards;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,.85);
+      font-size: .9rem;
+    }
+
+    .chip-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem;
+      flex-shrink: 0;
+    }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      padding: 40px;
+    }
+
+    .hero-badge {
+      width: min(380px, 90%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px;
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(10px);
+      position: relative;
+      animation: spin-border 18s linear infinite;
+    }
+
+    @keyframes spin-border {
+      from { box-shadow: 0 0 0 1px rgba(26,127,116,.3), 0 0 60px rgba(26,127,116,.1); }
+      50%  { box-shadow: 0 0 0 1px rgba(201,168,76,.3),  0 0 60px rgba(201,168,76,.1); }
+      to   { box-shadow: 0 0 0 1px rgba(26,127,116,.3),  0 0 60px rgba(26,127,116,.1); }
+    }
+
+    .badge-pe {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--teal-lt);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .badge-label {
+      font-size: .75rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 28px;
+    }
+
+    .badge-stat {
+      font-size: 2rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .badge-stat-label {
+      font-size: .72rem;
+      color: rgba(255,255,255,.45);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .badge-divider {
+      width: 40px; height: 1px;
+      background: rgba(255,255,255,.15);
+      margin: 20px auto;
+    }
+
+    /* ── NAV DOTS ─────────────────────────────────────── */
+    .nav-dots {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(13,31,45,.25);
+      border: 1px solid rgba(13,31,45,.2);
+      cursor: pointer;
+      transition: all .3s;
+      text-decoration: none;
+    }
+
+    .nav-dot:hover, .nav-dot.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      transform: scale(1.4);
+    }
+
+    /* ── SECTION SHELL ────────────────────────────────── */
+    section { padding: 100px 80px; }
+
+    .section-label {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 60px;
+    }
+
+    .section-heading span {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    /* ── PERFIL ───────────────────────────────────────── */
+    #perfil {
+      background: var(--cream);
+    }
+
+    .perfil-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .perfil-text p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .perfil-text p strong { color: var(--text); }
+
+    .accent-bar {
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    .perfil-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px 24px;
+      border: 1px solid rgba(0,0,0,.06);
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(13,31,45,.08);
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-number sup {
+      font-size: .9rem;
+      color: var(--teal);
+    }
+
+    .stat-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── SERVICIOS ────────────────────────────────────── */
+    #servicios {
+      background: var(--navy);
+    }
+
+    #servicios .section-label { color: var(--gold); }
+    #servicios .section-heading { color: var(--white); }
+    #servicios .section-heading span { color: var(--teal-lt); }
+
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .servicio-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      padding: 36px 32px;
+      transition: background .3s, border-color .3s, transform .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .servicio-card::before {
+      content: '';
+      position: absolute;
+      bottom: -40px; right: -40px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(46,184,168,.15) 0%, transparent 70%);
+      transition: opacity .3s;
+    }
+
+    .servicio-card:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(46,184,168,.3);
+      transform: translateY(-6px);
+    }
+
+    .servicio-icon {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .servicio-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .servicio-desc {
+      font-size: .875rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,.5);
+    }
+
+    /* ── PROCESO ──────────────────────────────────────── */
+    #proceso {
+      background: var(--white);
+    }
+
+    .proceso-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .proceso-steps::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      z-index: 0;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-number {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      border: 2px solid transparent;
+      transition: transform .3s;
+    }
+
+    .step:nth-child(odd) .step-number {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .step:nth-child(even) .step-number {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .step:hover .step-number { transform: scale(1.1); }
+
+    .step-title {
+      font-weight: 500;
+      font-size: .9rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── POR QUÉ ──────────────────────────────────────── */
+    #porque {
+      background: var(--cream);
+    }
+
+    .porque-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .lista-group h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+
+    .lista-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .lista-bullet {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--teal-lt));
+      color: white;
+      font-size: .65rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .lista-text {
+      font-size: .925rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ── FAQ ──────────────────────────────────────────── */
+    #faq {
+      background: var(--white);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .faq-card {
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 32px 28px;
+      border-left: 4px solid var(--teal);
+      transition: transform .3s;
+    }
+
+    .faq-card:hover { transform: translateX(4px); }
+
+    .faq-q {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .faq-a {
+      font-size: .875rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ── CTA ──────────────────────────────────────────── */
+    #contacto {
+      background: linear-gradient(135deg, var(--navy) 0%, #0a3d38 100%);
+      text-align: center;
+      padding: 120px 80px;
+    }
+
+    #contacto .section-heading { color: var(--white); margin-bottom: 24px; }
+    #contacto .section-heading span { color: var(--gold); }
+
+    #contacto p {
+      color: rgba(255,255,255,.6);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 52px;
+      line-height: 1.75;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: .9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all .3s;
+      letter-spacing: .04em;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: var(--white);
+      border: 2px solid var(--teal);
+    }
+
+    .btn-primary:hover {
+      background: var(--teal-lt);
+      border-color: var(--teal-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(46,184,168,.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,.25);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* ── ANIMATIONS ───────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      section { padding: 70px 32px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 80px 32px 60px; }
+      .perfil-grid,
+      .porque-wrapper,
+      .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+      .servicios-grid { grid-template-columns: 1fr 1fr; }
+      .proceso-steps {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .proceso-steps::before { display: none; }
+      .nav-dots { display: none; }
+    }
+
+    @media (max-width: 580px) {
+      .servicios-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" aria-label="Secciones">
+  <a href="#hero"      class="nav-dot active" title="Inicio"></a>
+  <a href="#perfil"    class="nav-dot" title="Perfil"></a>
+  <a href="#servicios" class="nav-dot" title="Servicios"></a>
+  <a href="#proceso"   class="nav-dot" title="Proceso"></a>
+  <a href="#porque"    class="nav-dot" title="¿Por qué?"></a>
+  <a href="#faq"       class="nav-dot" title="FAQ"></a>
+  <a href="#contacto"  class="nav-dot" title="Contacto"></a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-grid-lines"></div>
+
+  <div class="hero-left">
+    <p class="hero-eyebrow">Profesional Autorizado · Puerto Rico</p>
+    <h1 class="hero-name">José Orengo<br><em>Rodríguez</em></h1>
+    <p class="hero-title">Ingeniero Mecánico Licenciado &amp; PA</p>
+    <p class="hero-tagline">
+      Facilito y agilizo trámites de permisos, certificaciones e
+      inspecciones ante las agencias gubernamentales de Puerto Rico —
+      con la precisión y el rigor de la ingeniería.
+    </p>
+    <div class="contact-chips">
+      <div class="chip">
+        <div class="chip-icon">✉</div>
+        <span>jorengo.pr@gmail.com</span>
+      </div>
+      <div class="chip">
+        <div class="chip-icon">☎</div>
+        <span>787-234-1462</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-badge">
+      <div class="badge-pe">PE</div>
+      <div class="badge-label">Professional Engineer</div>
+      <div class="badge-divider"></div>
+      <div class="badge-stat">PR</div>
+      <div class="badge-stat-label">Puerto Rico Licensed</div>
+      <div class="badge-divider"></div>
+      <div class="badge-stat">PA</div>
+      <div class="badge-stat-label">Profesional Autorizado</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PERFIL ── -->
+<section id="perfil">
+  <p class="section-label reveal">Acerca de mí</p>
+  <h2 class="section-heading reveal">Experiencia que<br><span>marca la diferencia</span></h2>
+
+  <div class="perfil-grid">
+    <div class="perfil-text reveal">
+      <div class="accent-bar"></div>
+      <p>
+        Soy <strong>Ingeniero Mecánico licenciado</strong> con amplia experiencia en ingeniería,
+        calidad, cumplimiento regulatorio, documentación técnica e inspecciones, con trayectoria
+        en la industria de manufactura y dispositivos médicos.
+      </p>
+      <p>
+        Como <strong>Profesional Autorizado (PA)</strong> en Puerto Rico, combino ese rigor técnico
+        con un conocimiento profundo del marco regulatorio local para ofrecerte soluciones ágiles,
+        precisas y confiables.
+      </p>
+      <p>
+        Mi compromiso es ayudar a individuos, comerciantes y empresas a completar sus trámites
+        de manera eficiente, evitando errores costosos y retrasos innecesarios.
+      </p>
+    </div>
+
+    <div class="perfil-stats reveal">
+      <div class="stat-card">
+        <div class="stat-number">100<sup>%</sup></div>
+        <div class="stat-desc">Cumplimiento normativo en cada proyecto</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-desc">Áreas de servicio cubiertas integralmente</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">PE</div>
+        <div class="stat-desc">Licencia de Ingeniero Profesional activa</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">PA</div>
+        <div class="stat-desc">Certificado por el gobierno de Puerto Rico</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICIOS ── -->
+<section id="servicios">
+  <p class="section-label reveal">Lo que ofrezco</p>
+  <h2 class="section-heading reveal">Servicios <span>principales</span></h2>
+
+  <div class="servicios-grid">
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">🏗️</span>
+      <div class="servicio-title">Gestión de Permisos</div>
+      <div class="servicio-desc">
+        Permisos de construcción, uso, únicos de negocios y más. Tramito todo ante
+        las agencias correspondientes de forma rápida y sin contratiempos.
+      </div>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">📋</span>
+      <div class="servicio-title">Obtención de Licencias</div>
+      <div class="servicio-desc">
+        Licencias sanitarias y otros permisos requeridos para operar tu negocio o
+        proyecto legalmente en Puerto Rico.
+      </div>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">✅</span>
+      <div class="servicio-title">Certificaciones</div>
+      <div class="servicio-desc">
+        Certificaciones de prevención de incendios, consultas de ubicación y
+        cumplimiento reglamentario para proyectos y negocios.
+      </div>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">🔍</span>
+      <div class="servicio-title">Inspecciones Técnicas</div>
+      <div class="servicio-desc">
+        Inspecciones para garantizar la seguridad y calidad de las obras,
+        con representación ante las autoridades competentes.
+      </div>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">💡</span>
+      <div class="servicio-title">Asesoría Técnica</div>
+      <div class="servicio-desc">
+        Consultoría especializada en cumplimiento regulatorio, análisis técnico y
+        estrategias para maximizar el retorno de tu inversión.
+      </div>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">📐</span>
+      <div class="servicio-title">Evaluación &amp; Certificación</div>
+      <div class="servicio-desc">
+        Evaluación y certificación del cumplimiento de la normativa vigente en
+        proyectos de construcción y desarrollo en Puerto Rico.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESO ── -->
+<section id="proceso">
+  <p class="section-label reveal">Cómo trabajo</p>
+  <h2 class="section-heading reveal">Mi <span>proceso</span></h2>
+
+  <div class="proceso-steps">
+    <div class="step reveal">
+      <div class="step-number">1</div>
+      <div class="step-title">Evaluación Inicial</div>
+      <div class="step-desc">Analizo tu proyecto y necesidades específicas.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-number">2</div>
+      <div class="step-title">Planificación Estratégica</div>
+      <div class="step-desc">Desarrollo un plan de acción detallado y personalizado.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-number">3</div>
+      <div class="step-title">Gestión de Permisos</div>
+      <div class="step-desc">Tramito ante las agencias gubernamentales.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-number">4</div>
+      <div class="step-title">Supervisión &amp; Control</div>
+      <div class="step-desc">Inspecciones técnicas y seguimiento normativo.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-number">5</div>
+      <div class="step-title">Entrega &amp; Cierre</div>
+      <div class="step-desc">Finalización exitosa y certificaciones correspondientes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── POR QUÉ CONTRATARME ── -->
+<section id="porque">
+  <p class="section-label reveal">Ventaja competitiva</p>
+  <h2 class="section-heading reveal">¿Por qué <span>contratarme?</span></h2>
+
+  <div class="porque-wrapper">
+    <div class="lista-group reveal">
+      <h3>Beneficios</h3>
+      <div class="lista-item">
+        <div class="lista-bullet">✓</div>
+        <p class="lista-text">Experiencia técnica sólida como Ingeniero Mecánico y PA certificado.</p>
+      </div>
+      <div class="lista-item">
+        <div class="lista-bullet">✓</div>
+        <p class="lista-text">Agilidad en la gestión de permisos — reducimos los tiempos de espera.</p>
+      </div>
+      <div class="lista-item">
+        <div class="lista-bullet">✓</div>
+        <p class="lista-text">Cumplimiento normativo garantizado en cada etapa del proyecto.</p>
+      </div>
+      <div class="lista-item">
+        <div class="lista-bullet">✓</div>
+        <p class="lista-text">Atención personalizada y soluciones a medida para tu presupuesto.</p>
+      </div>
+    </div>
+
+    <div class="lista-group reveal">
+      <h3>Diferenciadores</h3>
+      <div class="lista-item">
+        <div class="lista-bullet">★</div>
+        <p class="lista-text">Compromiso con la excelencia y la satisfacción del cliente en cada proyecto.</p>
+      </div>
+      <div class="lista-item">
+        <div class="lista-bullet">★</div>
+        <p class="lista-text">Enfoque en la sostenibilidad y el desarrollo responsable.</p>
+      </div>
+      <div class="lista-item">
+        <div class="lista-bullet">★</div>
+        <p class="lista-text">Comunicación clara y transparente en cada etapa del proceso.</p>
+      </div>
+      <div class="lista-item">
+        <div class="lista-bullet">★</div>
+        <p class="lista-text">Tarifas competitivas y ajustadas a tu realidad, con cotizaciones personalizadas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq">
+  <p class="section-label reveal">Preguntas frecuentes</p>
+  <h2 class="section-heading reveal">Todo lo que<br><span>necesitas saber</span></h2>
+
+  <div class="faq-grid">
+    <div class="faq-card reveal">
+      <div class="faq-q">¿Qué es un Profesional Autorizado (PA)?</div>
+      <div class="faq-a">
+        Un PA es un profesional certificado por el gobierno de Puerto Rico para agilizar
+        los procesos de permisos y licencias de construcción, representando a sus clientes
+        ante las agencias gubernamentales.
+      </div>
+    </div>
+    <div class="faq-card reveal">
+      <div class="faq-q">¿Cuáles son los beneficios de contratar un PA?</div>
+      <div class="faq-a">
+        Un PA puede ayudarte a ahorrar tiempo y dinero, evitar errores costosos y asegurar
+        el cumplimiento de las regulaciones vigentes en Puerto Rico.
+      </div>
+    </div>
+    <div class="faq-card reveal">
+      <div class="faq-q">¿Cuánto cuesta contratar un PA?</div>
+      <div class="faq-a">
+        El costo varía según la complejidad del proyecto. Contáctame para obtener una
+        cotización personalizada y sin compromiso.
+      </div>
+    </div>
+    <div class="faq-card reveal">
+      <div class="faq-q">¿Qué tipos de permisos puedes gestionar?</div>
+      <div class="faq-a">
+        Permisos de construcción, permisos de uso, permisos únicos de negocios, licencias
+        sanitarias, certificaciones de prevención de incendios y consultas de ubicación.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACTO ── -->
+<section id="contacto">
+  <h2 class="section-heading reveal">Comencemos tu<br><span>proyecto hoy</span></h2>
+  <p class="reveal">
+    Contáctame para discutir tus necesidades y descubrir cómo puedo ayudarte
+    a alcanzar tus objetivos de manera eficiente y confiable.
+  </p>
+  <div class="cta-buttons reveal">
+    <a href="mailto:jorengo.pr@gmail.com" class="btn btn-primary">✉ Enviar correo</a>
+    <a href="tel:7872341462"              class="btn btn-outline">☎ 787-234-1462</a>
+  </div>
+</section>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Active nav dot
+  const sections = document.querySelectorAll('section[id]');
+  const dots = document.querySelectorAll('.nav-dot');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        dots.forEach(d => d.classList.remove('active'));
+        const dot = document.querySelector(`.nav-dot[href="#${e.target.id}"]`);
+        if (dot) dot.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => sectionObserver.observe(s));
+</script>
+</body>
+</html>
